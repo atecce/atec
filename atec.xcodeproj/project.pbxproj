@@ -12,6 +12,7 @@
 		7303F12B21692DD700B3B0D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7303F12921692DD700B3B0D1 /* Main.storyboard */; };
 		7303F12D21692DD900B3B0D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7303F12C21692DD900B3B0D1 /* Assets.xcassets */; };
 		7303F13021692DD900B3B0D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7303F12E21692DD900B3B0D1 /* LaunchScreen.storyboard */; };
+		7303F13A2169327E00B3B0D1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7303F1392169327E00B3B0D1 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		7303F12C21692DD900B3B0D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7303F12F21692DD900B3B0D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7303F13121692DD900B3B0D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7303F1372169327200B3B0D1 /* atec.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = atec.entitlements; sourceTree = "<group>"; };
+		7303F1392169327E00B3B0D1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7303F13A2169327E00B3B0D1 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +44,7 @@
 			children = (
 				7303F12421692DD700B3B0D1 /* atec */,
 				7303F12321692DD700B3B0D1 /* Products */,
+				7303F1382169327E00B3B0D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +59,7 @@
 		7303F12421692DD700B3B0D1 /* atec */ = {
 			isa = PBXGroup;
 			children = (
+				7303F1372169327200B3B0D1 /* atec.entitlements */,
 				7303F12521692DD700B3B0D1 /* AppDelegate.swift */,
 				7303F12721692DD700B3B0D1 /* ViewController.swift */,
 				7303F12921692DD700B3B0D1 /* Main.storyboard */,
@@ -62,6 +68,14 @@
 				7303F13121692DD900B3B0D1 /* Info.plist */,
 			);
 			path = atec;
+			sourceTree = "<group>";
+		};
+		7303F1382169327E00B3B0D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7303F1392169327E00B3B0D1 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +110,14 @@
 				TargetAttributes = {
 					7303F12121692DD700B3B0D1 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -282,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = atec/atec.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82E2K77P5;
 				INFOPLIST_FILE = atec/Info.plist;
@@ -300,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = atec/atec.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82E2K77P5;
 				INFOPLIST_FILE = atec/Info.plist;
