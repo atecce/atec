@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +18,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        requestNotificationAuthorization()
+
+        let subscription = CKQuerySubscription(recordType: "Hit", predicate: NSPredicate(value: true), options: [.firesOnRecordCreation])
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.alertBody = "You got a new hit!"
+        notificationInfo.shouldSendContentAvailable = true
+        subscription.notificationInfo = notificationInfo
+        
+        database.save(subscription) {
+            subscriptionId, error in
+            
+            print("subscriptionId: \(String(describing: subscriptionId))")
+            print("error: \(String(describing: error?.localizedDescription))")
+        }
+        
+        application.registerForRemoteNotifications()
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("did register for remote notifications with device token \(token)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("did fail to register remote notifications with error \(error.localizedDescription)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        print("user info: \(userInfo)")
+        let notification = CKQueryNotification(fromRemoteNotificationDictionary: userInfo)
+        
+        print("notification \(notification)")
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    private func requestNotificationAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
+            (granted, error) in
+            
+            if !granted {
+                print("access denied for notification center")
+                return
+            }
+            
+            print("access granted for notification center")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
