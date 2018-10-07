@@ -36,6 +36,7 @@
     {
       "size" : "44x44",
       "idiom" : "watch",
+      "filename" : "IMG_0177 copy.jpg",
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "40mm"
@@ -69,8 +70,9 @@
       "subtype" : "44mm"
     },
     {
-      "idiom" : "watch-marketing",
       "size" : "1024x1024",
+      "idiom" : "watch-marketing",
+      "filename" : "IMG_0177 copy-1.jpg",
       "scale" : "1x"
     }
   ],
